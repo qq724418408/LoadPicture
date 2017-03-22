@@ -11,6 +11,8 @@ import com.forms.wjl.loadpicture.base.BaseActivity;
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private Button btnGoToGlideDomo; // 按钮 //
+    private Button btnGoToPicassoDomo; // 按钮 //
+    private Button btnGoToFrescoDomo; // 按钮 //
     private Intent intent;
 
     @Override
@@ -24,7 +26,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void initView() {
-
+        btnGoToGlideDomo = (Button) findViewById(R.id.btn_to_glide_demo);
+        btnGoToPicassoDomo = (Button) findViewById(R.id.btn_to_picasso_demo);
+        btnGoToFrescoDomo = (Button) findViewById(R.id.btn_to_fresco_demo);
     }
 
     @Override
@@ -34,7 +38,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void initListener() {
-
+        btnGoToGlideDomo.setOnClickListener(this);
+        btnGoToPicassoDomo.setOnClickListener(this);
+        btnGoToFrescoDomo.setOnClickListener(this);
     }
 
     @Override
