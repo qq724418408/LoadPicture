@@ -68,7 +68,7 @@ public class GlideDemoActivity extends BaseActivity implements View.OnClickListe
     @Override
     protected void initData() {
         //loadPicture(gifUrl);
-        new MyTask().execute(gifUrl);
+        new MyTask().execute(URLConstant.getImgUrlList().get(1));
         lvPicture.setAdapter(new PictureListViewAdapter(URLConstant.getImgUrlList(), this));
         //Glide.with(this).load(URLConstant.getImgUrlList().get(1)).into(new SimpleTarget<GlideDrawable>() {
         Glide.with(this)
@@ -144,7 +144,6 @@ public class GlideDemoActivity extends BaseActivity implements View.OnClickListe
         @Override
         protected GifDrawable doInBackground(String... params) {
             GifDrawable gifDrawable = null;
-            int i = 0;
             try {
                 gifDrawable = Glide.with(GlideDemoActivity.this).load(params[0]).asGif()
                         .into(AbsListView.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
@@ -153,11 +152,6 @@ public class GlideDemoActivity extends BaseActivity implements View.OnClickListe
                 e.printStackTrace();
             } catch (ExecutionException e) {
                 e.printStackTrace();
-            }
-            while (null == gifDrawable) {
-                SystemClock.sleep(2000);
-                i++;
-                publishProgress(i);
             }
             return gifDrawable;
         }
