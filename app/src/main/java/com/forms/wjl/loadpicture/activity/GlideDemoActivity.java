@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -154,6 +155,7 @@ public class GlideDemoActivity extends BaseActivity implements View.OnClickListe
                 e.printStackTrace();
             }
             while (null == gifDrawable) {
+                SystemClock.sleep(2000);
                 i++;
                 publishProgress(i);
             }
