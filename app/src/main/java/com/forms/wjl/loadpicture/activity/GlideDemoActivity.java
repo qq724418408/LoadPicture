@@ -5,8 +5,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.forms.wjl.loadpicture.R;
 import com.forms.wjl.loadpicture.base.BaseActivity;
+
+import static com.forms.wjl.loadpicture.constant.URLConstant.gifUrl;
 
 public class GlideDemoActivity extends BaseActivity implements View.OnClickListener{
 
@@ -29,7 +32,7 @@ public class GlideDemoActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     protected void initData() {
-        //Glide.with(this).load(gifUrl).into(ivGif);
+        Glide.with(this).load(gifUrl).into(ivGif);
     }
 
     @Override

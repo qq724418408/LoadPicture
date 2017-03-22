@@ -10,7 +10,7 @@ import com.forms.wjl.loadpicture.base.BaseActivity;
 
 public class PicassoDemoActivity extends BaseActivity implements View.OnClickListener {
 
-    private Button btn; // 按钮 // http://storage.slide.news.sina.com.cn/slidenews/77_ori/2017_12/74766_765125_520053.gif
+    private Button btn; // 按钮
     private ImageView ivGif;
 
     @Override
