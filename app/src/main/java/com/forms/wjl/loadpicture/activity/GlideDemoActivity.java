@@ -22,6 +22,7 @@ import com.forms.wjl.loadpicture.R;
 import com.forms.wjl.loadpicture.adapter.PictureListViewAdapter;
 import com.forms.wjl.loadpicture.base.BaseActivity;
 import com.forms.wjl.loadpicture.constant.URLConstant;
+import com.forms.wjl.loadpicture.view.GlideCircleTransform;
 
 import java.util.concurrent.ExecutionException;
 
@@ -71,6 +72,7 @@ public class GlideDemoActivity extends BaseActivity implements View.OnClickListe
         //Glide.with(this).load(URLConstant.getImgUrlList().get(1)).into(new SimpleTarget<GlideDrawable>() {
         Glide.with(this)
                 .load(getImgUrlList().get(1))
+                .transform(new GlideCircleTransform(this))
                 .placeholder(R.mipmap.ic_launcher)
                 .animate(R.anim.alpha_item_in)
                 .into(new SimpleTarget<GlideDrawable>() {
