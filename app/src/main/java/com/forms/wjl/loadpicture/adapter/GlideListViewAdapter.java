@@ -63,6 +63,7 @@ public class GlideListViewAdapter extends BaseAdapter {
                 .error(R.mipmap.image_default)
                 .transform(new GlideCircleTransform(context))
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .placeholder(R.mipmap.image_loading)
                 .into(holder.imageView);
         String today;
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

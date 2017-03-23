@@ -61,6 +61,7 @@ public class PicassoListViewAdapter extends BaseAdapter {
                 .load(urlList.get(position))
                 .transform(new PicassoCircleTransform())
                 .error(R.mipmap.image_default)
+                .placeholder(R.mipmap.image_loading)
                 .into(holder.imageView);
         String today;
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

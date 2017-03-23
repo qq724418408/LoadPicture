@@ -36,7 +36,12 @@ public class PicassoDemoActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     protected void initData() {
-        Picasso.with(this).load(URLConstant.getImgUrlList().get(1)).transform(new PicassoCircleTransform()).error(R.mipmap.image_default).into(ivGif);
+        Picasso.with(this)
+                .load(URLConstant.getImgUrlList().get(1))
+                .transform(new PicassoCircleTransform())
+                .error(R.mipmap.image_default)
+                .placeholder(R.mipmap.image_loading)
+                .into(ivGif);
         lvPicture.setAdapter(new PicassoListViewAdapter(URLConstant.getImgUrlList(), this)); // listview设置适配器
     }
 

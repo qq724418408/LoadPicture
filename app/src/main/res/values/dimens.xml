@@ -13,6 +13,12 @@
     <dimen name="x_large_width">96dp</dimen>
     <dimen name="x_x_large_width">128dp</dimen>
 
+    <dimen name="small_icon_width">24dp</dimen>
+    <dimen name="small_icon_height">24dp</dimen>
+
+    <dimen name="item_iv_width">64dp</dimen>
+    <dimen name="item_iv_height">64dp</dimen>
+
     <dimen name="small_height">8dp</dimen>
     <dimen name="medium_height">16dp</dimen>
     <dimen name="large_height">48dp</dimen>

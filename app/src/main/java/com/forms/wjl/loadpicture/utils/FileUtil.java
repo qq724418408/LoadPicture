@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
+import com.forms.wjl.loadpicture.R;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -19,10 +20,7 @@ import java.util.concurrent.ExecutionException;
 /**
  * Created by bubbly on 2017/3/23.
  */
-
 public class FileUtil {
-
-    private static String path;
 
     /**
      * 获取sd卡路径
@@ -39,10 +37,17 @@ public class FileUtil {
     public static void downLoadPictureToSD(final Context context, final String imgUrl, final String imgName) {
         new Thread(new Runnable() {
             Bitmap bitmap;
+
             @Override
             public void run() {
                 try {
-                    bitmap = Glide.with(context).load(imgUrl).asBitmap().into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get();
+                    bitmap = Glide.with(context)
+                            .load(imgUrl)
+                            .asBitmap()
+                            .error(R.mipmap.image_default)
+                            .placeholder(R.mipmap.image_loading)
+                            .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+                            .get();
                     saveFileToSDCard(context, bitmap, imgName);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -68,6 +73,9 @@ public class FileUtil {
                 bitmap = BitmapFactory.decodeFile(path);
             }
         } catch (Exception e) {
+        }
+        if (null == bitmap) { //
+            bitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.image_default);
         }
         return bitmap;
     }

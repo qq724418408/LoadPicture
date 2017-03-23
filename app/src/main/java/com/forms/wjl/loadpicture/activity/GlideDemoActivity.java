@@ -45,8 +45,8 @@ public class GlideDemoActivity extends BaseActivity implements View.OnClickListe
         Glide.with(this)
                 .load(gifUrl)
                 .asGif()
-                .error(R.mipmap.image_default)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .error(R.mipmap.image_default)
                 .placeholder(R.mipmap.image_loading)
                 .into(ivGif);
     }

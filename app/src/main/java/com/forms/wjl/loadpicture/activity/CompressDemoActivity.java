@@ -46,9 +46,9 @@ public class CompressDemoActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     protected void initData() {
+        FileUtil.downLoadPictureToSD(this, URLConstant.imgUrl, fileName);
         bitmap = FileUtil.getDiskBitmap(this, fileName);
         ivResources.setImageBitmap(bitmap);
-        FileUtil.downLoadPictureToSD(this, URLConstant.imgUrl, fileName);
         imgPath = FileUtil.getImgPath(this, fileName);
     }
 
@@ -60,7 +60,7 @@ public class CompressDemoActivity extends BaseActivity implements View.OnClickLi
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 int w = 10 * progress;
                 int h = 10 * progress;
-                bitmap = BitmapCompressUtil.sizeCompressBitmap(imgPath, w, h);
+                bitmap = BitmapCompressUtil.sizeCompressBitmap(CompressDemoActivity.this, imgPath, w, h);
                 ivTarget.setImageBitmap(bitmap);
                 tvResult.setText("尺寸压缩\n\n" + "宽为：" + bitmap.getWidth() + "\n\n高为：" + bitmap.getHeight());
             }
@@ -78,8 +78,8 @@ public class CompressDemoActivity extends BaseActivity implements View.OnClickLi
         sbQuality.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                bitmap = BitmapCompressUtil.getBitmapFromLocal(imgPath);
-                bitmap = BitmapCompressUtil.qualityCompressBitmap(bitmap, progress);
+                bitmap = BitmapCompressUtil.getBitmapFromLocal(CompressDemoActivity.this, imgPath);
+                bitmap = BitmapCompressUtil.qualityCompressBitmap(CompressDemoActivity.this, bitmap, progress);
                 ivTarget.setImageBitmap(bitmap);
                 tvResult.setText("质量压缩\n\n" + "质量为：" + progress);
             }
