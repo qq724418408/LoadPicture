@@ -1,31 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/large_height"
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_left"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="@color/colorWhite" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_to_compress_demo"
+        android:layout_width="@dimen/x_x_large_width"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/small_margin"
+        android:background="@drawable/selector_button_normal"
+        android:text="@string/common_btn_compress" />
 
     <Button
         android:id="@+id/btn_to_glide_demo"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/x_x_large_width"
         android:layout_height="wrap_content"
-        android:text="@string/common_btn_glide"/>
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/small_margin"
+        android:background="@drawable/selector_button_normal"
+        android:text="@string/common_btn_glide" />
 
     <Button
         android:id="@+id/btn_to_fresco_demo"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/x_x_large_width"
         android:layout_height="wrap_content"
-        android:text="@string/common_btn_fresco"/>
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/small_margin"
+        android:background="@drawable/selector_button_normal"
+        android:text="@string/common_btn_fresco" />
 
     <Button
         android:id="@+id/btn_to_picasso_demo"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/x_x_large_width"
         android:layout_height="wrap_content"
-        android:text="@string/common_btn_picasso"/>
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/small_margin"
+        android:background="@drawable/selector_button_normal"
+        android:text="@string/common_btn_picasso" />
 
 
 </LinearLayout>

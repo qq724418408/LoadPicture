@@ -4,23 +4,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_progress"
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:text="1"
-        android:layout_height="wrap_content" />
+    <include layout="@layout/layout_title_bar" />
 
     <ImageView
         android:id="@+id/iv_glide_gif"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="fitCenter"
-        android:src="@mipmap/ic_launcher" />
+        android:layout_margin="@dimen/small_margin"
+        android:src="@mipmap/image_loading" />
 
     <ListView
         android:id="@+id/lv_picture"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

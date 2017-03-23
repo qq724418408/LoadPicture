@@ -1,4 +1,4 @@
-package com.forms.wjl.loadpicture.view;
+package com.forms.wjl.loadpicture.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,6 +13,7 @@ import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
  * 将网络图片转换为圆形
  */
 public class GlideCircleTransform extends BitmapTransformation {
+
     public GlideCircleTransform(Context context) {
         super(context);
     }
@@ -27,14 +28,11 @@ public class GlideCircleTransform extends BitmapTransformation {
         int size = Math.min(toTransform.getWidth(), toTransform.getHeight());
         int x = (toTransform.getWidth() - size) / 2;
         int y = (toTransform.getHeight() - size) / 2;
-
         Bitmap squared = Bitmap.createBitmap(toTransform, x, y, size, size);
-
         Bitmap result = pool.get(size, size, Bitmap.Config.ARGB_8888);
         if (result == null) {
             result = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
         }
-
         Canvas canvas = new Canvas(result);
         Paint paint = new Paint();
         paint.setShader(new BitmapShader(squared, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP));

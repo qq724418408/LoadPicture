@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">LoadPicture</string>
+    <string name="common_back">返回</string>
+    <string name="common_btn_compress">图片压缩演示</string>
+    <string name="common_btn_compress_size">尺寸压缩</string>
+    <string name="common_btn_compress_quality">质量压缩</string>
     <string name="common_btn_glide">Glide演示</string>
     <string name="common_btn_fresco">Fresco演示</string>
     <string name="common_btn_picasso">Picasso演示</string>

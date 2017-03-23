@@ -10,9 +10,10 @@ import com.forms.wjl.loadpicture.base.BaseActivity;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
-    private Button btnGoToGlideDomo; // 按钮 //
-    private Button btnGoToPicassoDomo; // 按钮 //
-    private Button btnGoToFrescoDomo; // 按钮 //
+    private Button btnGoToGlideDemo; // Glide演示按钮
+    private Button btnGoToPicassoDemo; // Picasso演示按钮
+    private Button btnGoToFrescoDemo; // Fresco演示按钮
+    private Button btnCompress; // 压缩演示按钮
     private Intent intent;
 
     @Override
@@ -26,9 +27,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void initView() {
-        btnGoToGlideDomo = (Button) findViewById(R.id.btn_to_glide_demo);
-        btnGoToPicassoDomo = (Button) findViewById(R.id.btn_to_picasso_demo);
-        btnGoToFrescoDomo = (Button) findViewById(R.id.btn_to_fresco_demo);
+        btnCompress = (Button) findViewById(R.id.btn_to_compress_demo);
+        btnGoToGlideDemo = (Button) findViewById(R.id.btn_to_glide_demo);
+        btnGoToPicassoDemo = (Button) findViewById(R.id.btn_to_picasso_demo);
+        btnGoToFrescoDemo = (Button) findViewById(R.id.btn_to_fresco_demo);
     }
 
     @Override
@@ -38,9 +40,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void initListener() {
-        btnGoToGlideDomo.setOnClickListener(this);
-        btnGoToPicassoDomo.setOnClickListener(this);
-        btnGoToFrescoDomo.setOnClickListener(this);
+        btnCompress.setOnClickListener(this);
+        btnGoToGlideDemo.setOnClickListener(this);
+        btnGoToPicassoDemo.setOnClickListener(this);
+        btnGoToFrescoDemo.setOnClickListener(this);
     }
 
     @Override
@@ -48,6 +51,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.btn_to_glide_demo:
                 intent = new Intent(this,GlideDemoActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btn_to_compress_demo:
+                intent = new Intent(this,CompressDemoActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_to_picasso_demo:

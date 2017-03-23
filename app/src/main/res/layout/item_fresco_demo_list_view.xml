@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -9,7 +10,7 @@
         android:layout_height="64dp"
         android:orientation="horizontal">
 
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/iv_pic"
             android:layout_width="64dp"
             android:layout_height="match_parent"
@@ -17,7 +18,14 @@
             android:layout_marginLeft="@dimen/small_margin"
             android:layout_marginTop="@dimen/small_margin"
             android:scaleType="fitCenter"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/ic_launcher"
+            app:actualImageScaleType="fitCenter"
+            app:failureImage="@mipmap/image_default"
+            app:failureImageScaleType="fitCenter"
+            app:placeholderImage="@mipmap/image_loading"
+            app:placeholderImageScaleType="fitCenter"
+            app:roundAsCircle="true"
+            app:roundedCornerRadius="180dp" />
 
         <TextView
             android:id="@+id/tv_content"

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title_bar" />
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdv"
+        android:layout_width="@dimen/x_large_width"
+        android:layout_height="@dimen/x_large_height"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/small_margin"
+        android:scaleType="fitCenter"
+        app:failureImage="@mipmap/image_default"
+        app:failureImageScaleType="fitCenter"
+        app:placeholderImage="@mipmap/image_loading"
+        app:placeholderImageScaleType="fitCenter"
+        app:roundAsCircle="true"
+        app:roundedCornerRadius="180dp"
+        fresco:actualImageScaleType="focusCrop" />
+
+    <ListView
+        android:id="@+id/lv_picture"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

@@ -1,20 +1,29 @@
 package com.forms.wjl.loadpicture.activity;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListView;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.forms.wjl.loadpicture.R;
+import com.forms.wjl.loadpicture.adapter.FrescoListViewAdapter;
 import com.forms.wjl.loadpicture.base.BaseActivity;
+import com.forms.wjl.loadpicture.constant.URLConstant;
 
-public class FrescoDemoActivity extends BaseActivity implements View.OnClickListener{
+public class FrescoDemoActivity extends BaseActivity implements View.OnClickListener {
 
-    private Button btn; // 按钮 // http://storage.slide.news.sina.com.cn/slidenews/77_ori/2017_12/74766_765125_520053.gif
+    private SimpleDraweeView simpleDraweeView;
+    private ListView lvPicture;
+    private ImageView ivBack; // 返回
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        Fresco.initialize(this);
+        setContentView(R.layout.activity_fresco_demo);
         initView();
         initData();
         initListener();
@@ -22,21 +31,28 @@ public class FrescoDemoActivity extends BaseActivity implements View.OnClickList
 
     @Override
     protected void initView() {
-        
+        ivBack = (ImageView) findViewById(R.id.iv_back);
+        simpleDraweeView = (SimpleDraweeView) findViewById(R.id.sdv);
+        lvPicture = (ListView) findViewById(R.id.lv_picture);
     }
 
     @Override
     protected void initData() {
-
+        lvPicture.setAdapter(new FrescoListViewAdapter(URLConstant.getImgUrlList(), this));
+        simpleDraweeView.setImageURI(Uri.parse(URLConstant.getImgUrlList().get(0)));
     }
 
     @Override
     protected void initListener() {
-
+        ivBack.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.iv_back: // 返回
+                finish();
+                break;
+        }
     }
 }

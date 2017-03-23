@@ -1,53 +1,27 @@
 package com.forms.wjl.loadpicture.activity;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.os.SystemClock;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.load.resource.gif.GifDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.forms.wjl.loadpicture.R;
-import com.forms.wjl.loadpicture.adapter.PictureListViewAdapter;
+import com.forms.wjl.loadpicture.adapter.GlideListViewAdapter;
 import com.forms.wjl.loadpicture.base.BaseActivity;
 import com.forms.wjl.loadpicture.constant.URLConstant;
-import com.forms.wjl.loadpicture.view.GlideCircleTransform;
 
-import java.util.concurrent.ExecutionException;
-
-import static com.forms.wjl.loadpicture.constant.URLConstant.getImgUrlList;
 import static com.forms.wjl.loadpicture.constant.URLConstant.gifUrl;
 
 public class GlideDemoActivity extends BaseActivity implements View.OnClickListener {
 
     private static String TAG = GlideDemoActivity.class.getSimpleName();
 
-    private Button btn; // 按钮 // http://storage.slide.news.sina.com.cn/slidenews/77_ori/2017_12/74766_765125_520053.gif
+    private ImageView ivBack; // 返回
     private ImageView ivGif;
-    private TextView tvProgress;
     private ListView lvPicture;
-
-    private final Handler glideHanlder = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == 1) {
-                GlideDrawable glideDrawable = (GlideDrawable) msg.obj;
-                ivGif.setImageDrawable(glideDrawable);
-            }
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,33 +34,26 @@ public class GlideDemoActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     protected void initView() {
-        tvProgress = (TextView) findViewById(R.id.tv_progress);
+        ivBack = (ImageView) findViewById(R.id.iv_back);
         ivGif = (ImageView) findViewById(R.id.iv_glide_gif);
         lvPicture = (ListView) findViewById(R.id.lv_picture);
     }
 
     @Override
     protected void initData() {
-        //loadPicture(gifUrl);
-        new MyTask().execute(URLConstant.getImgUrlList().get(1));
-        lvPicture.setAdapter(new PictureListViewAdapter(URLConstant.getImgUrlList(), this));
-        //Glide.with(this).load(URLConstant.getImgUrlList().get(1)).into(new SimpleTarget<GlideDrawable>() {
+        lvPicture.setAdapter(new GlideListViewAdapter(URLConstant.getImgUrlList(), this));
         Glide.with(this)
-                .load(getImgUrlList().get(1))
-                .transform(new GlideCircleTransform(this))
-                .placeholder(R.mipmap.ic_launcher)
-                .animate(R.anim.alpha_item_in)
-                .into(new SimpleTarget<GlideDrawable>() {
-                    @Override
-                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
-                        ivGif.setImageDrawable(resource);
-                    }
-                });
+                .load(gifUrl)
+                .asGif()
+                .error(R.mipmap.image_default)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .placeholder(R.mipmap.image_loading)
+                .into(ivGif);
     }
 
     @Override
     protected void initListener() {
-
+        ivBack.setOnClickListener(this);
         lvPicture.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -95,11 +62,11 @@ public class GlideDemoActivity extends BaseActivity implements View.OnClickListe
 
                     case AbsListView.OnScrollListener.SCROLL_STATE_FLING:
                         // 当ListView处于滑动状态时，停止加载图片，保证操作界面流畅
-                        Glide.with(GlideDemoActivity.this).pauseRequests();
+                        //Glide.with(GlideDemoActivity.this).pauseRequests();
                         break;
                     case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
                         // 当ListView处于静止状态时，继续加载图片
-                        Glide.with(GlideDemoActivity.this).resumeRequests();
+                        //Glide.with(GlideDemoActivity.this).resumeRequests();
                         break;
                 }
             }
@@ -113,58 +80,10 @@ public class GlideDemoActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-
-    }
-
-    /**
-     * 加载图片
-     *
-     * @param url
-     */
-    public void loadPicture(final String url) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    GlideDrawable glideDrawable = Glide.with(GlideDemoActivity.this).load(url).into(100, 100).get();
-                    Message msg = Message.obtain();
-                    msg.what = 1;
-                    msg.obj = glideDrawable;
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-
-    class MyTask extends AsyncTask<String, Integer, GifDrawable> {
-
-        @Override
-        protected GifDrawable doInBackground(String... params) {
-            GifDrawable gifDrawable = null;
-            try {
-                gifDrawable = Glide.with(GlideDemoActivity.this).load(params[0]).asGif()
-                        .into(AbsListView.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-                        .get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-            return gifDrawable;
-        }
-
-        @Override
-        protected void onPostExecute(GifDrawable bitmap) {
-            ivGif.setImageDrawable(bitmap);
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            tvProgress.setText("进度：" + values[0]);
-            super.onProgressUpdate(values);
+        switch (v.getId()) {
+            case R.id.iv_back: // 返回
+                finish();
+                break;
         }
     }
 
