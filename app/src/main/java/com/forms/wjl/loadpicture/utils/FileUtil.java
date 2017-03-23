@@ -3,6 +3,8 @@ package com.forms.wjl.loadpicture.utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Handler;
+import android.os.Message;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
@@ -34,7 +36,8 @@ public class FileUtil {
     /**
      * 下载网络图片到sd卡
      */
-    public static void downLoadPictureToSD(final Context context, final String imgUrl, final String imgName) {
+    public static void downLoadPictureToSD(final Context context, final Handler handler, final String imgUrl, final String imgName) {
+
         new Thread(new Runnable() {
             Bitmap bitmap;
 
@@ -49,6 +52,10 @@ public class FileUtil {
                             .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
                             .get();
                     saveFileToSDCard(context, bitmap, imgName);
+                    Message msg = handler.obtainMessage();
+                    msg.what = 1;
+                    msg.obj = bitmap;
+                    handler.sendMessage(msg);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {

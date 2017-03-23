@@ -26,17 +26,13 @@ public class BitmapCompressUtil {
      * @param h 图片高度
      * @return
      */
-    public static Bitmap sizeCompressBitmap(Context context,String filePath, int w, int h) { // 图片路径
-        Bitmap bitmap = null;
+    public static Bitmap sizeCompressBitmap(String filePath, int w, int h) { // 图片路径
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true; //
-        bitmap = BitmapFactory.decodeFile(filePath, options);
-        if (null == bitmap) { //
-            bitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.image_default);
-        }
-        options.inSampleSize = calculateInSampleSize(options, w, h); // 自定义一个宽和高
+        BitmapFactory.decodeFile(filePath, options);
         options.inJustDecodeBounds = false; //
-        return bitmap; // 返回bitmap
+        options.inSampleSize = calculateInSampleSize(options, w, h); // 自定义一个宽和高
+        return BitmapFactory.decodeFile(filePath, options); // 返回bitmap
     }
 
     /**

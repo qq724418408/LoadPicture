@@ -2,6 +2,8 @@ package com.forms.wjl.loadpicture.activity;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -25,6 +27,18 @@ public class CompressDemoActivity extends BaseActivity implements View.OnClickLi
     private Bitmap bitmap;
     private String imgPath;
 
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    bitmap = (Bitmap) msg.obj;
+                    ivResources.setImageBitmap(bitmap);
+                    break;
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +60,7 @@ public class CompressDemoActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     protected void initData() {
-        FileUtil.downLoadPictureToSD(this, URLConstant.imgUrl, fileName);
+        FileUtil.downLoadPictureToSD(this, handler, URLConstant.imgUrl, fileName);
         bitmap = FileUtil.getDiskBitmap(this, fileName);
         ivResources.setImageBitmap(bitmap);
         imgPath = FileUtil.getImgPath(this, fileName);
@@ -60,9 +74,11 @@ public class CompressDemoActivity extends BaseActivity implements View.OnClickLi
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 int w = 10 * progress;
                 int h = 10 * progress;
-                bitmap = BitmapCompressUtil.sizeCompressBitmap(CompressDemoActivity.this, imgPath, w, h);
-                ivTarget.setImageBitmap(bitmap);
-                tvResult.setText("尺寸压缩\n\n" + "宽为：" + bitmap.getWidth() + "\n\n高为：" + bitmap.getHeight());
+                bitmap = BitmapCompressUtil.sizeCompressBitmap(imgPath, w, h);
+                if (bitmap != null) {
+                    ivTarget.setImageBitmap(bitmap);
+                    tvResult.setText("尺寸压缩\n\n" + "宽为：" + bitmap.getWidth() + "\n\n高为：" + bitmap.getHeight());
+                }
             }
 
             @Override
